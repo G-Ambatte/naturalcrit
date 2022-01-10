@@ -10,7 +10,8 @@ const LoginPage = React.createClass({
 	getDefaultProps: function() {
 		return {
 			redirect : '',
-			user : null
+			user : null,
+			environment : ''
 		};
 	},
 	getInitialState: function() {
@@ -67,7 +68,7 @@ const LoginPage = React.createClass({
 			processing : true,
 			errors     : null
 		});
-		AccountActions.login(this.state.username, this.state.password)
+		AccountActions.login(this.state.username, this.state.password, this.props.environment)
 			.then((token) => {
 				this.setState({
 					processing : false,

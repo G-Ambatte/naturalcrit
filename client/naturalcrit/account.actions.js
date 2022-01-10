@@ -1,14 +1,17 @@
 const request = require('superagent');
 
+const localEnvironments = [ 'local','docker','other'];
+
 const AccountActions = {
 
-	login : (user, pass) => {
+	login : (user, pass, environment) => {
 		return new Promise((resolve, reject) => {
 			request.post('/login')
 				.send({ user , pass })
 				.end((err, res) => {
 					if(err) return reject(res.body);
-					AccountActions.createSession(res.body);
+					AccountActions.createSession(res.body, environment);
+					console.log(res.body);
 					return resolve(res.body);
 				});
 		});
@@ -49,15 +52,23 @@ const AccountActions = {
 		});
 	},
 
-	createSession : (token) => {
-		// MAKE COOKIE WORK WITH LOCALHOST FOR TESTING
-		//document.cookie = `nc_session=${token};max-age=${60*60*24*365}; path=/; samesite=lax`;
-		document.cookie = `nc_session=${token}; max-age=${60*60*24*365}; path=/; samesite=lax; domain=${window.domain}`;
+	createSession : (token, environment) => {
+		console.log(environment);
+		console.log(localEnvironments.includes(environment));
+		var cookie = `nc_session=${token}; max-age=${60*60*24*365}; path=/; samesite=lax; domain=${window.domain}`;
+		if(localEnvironments.includes(environment)){
+			// MAKE COOKIE WORK WITH LOCALHOST FOR TESTING
+			cookie = `nc_session=${token};max-age=${60*60*24*365}; path=/; samesite=lax`;
+		}
+		document.cookie = cookie;
 	},
 
 	removeSession : () => {
-		document.cookie = `nc_session=; expires=Thu, 01 Jan 1970 00:00:01 GMT; samesite=lax; domain=${window.domain}`;
-		//document.cookie = `nc_session=;expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;domain=${window.domain};`;
+		var cookie = `nc_session=; expires=Thu, 01 Jan 1970 00:00:01 GMT; samesite=lax; domain=${window.domain}`;
+		if(localEnvironments.includes(environment)){
+			cookie = `nc_session=;expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;domain=${window.domain};`;
+		}
+		document.cookie = cookie;
 	}
 }
 

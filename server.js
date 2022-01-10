@@ -71,7 +71,8 @@ app.get('*', (req, res) => {
 			url : req.url,
 			user : req.user,
 			//authToken : authToken,
-			domain : config.get('domain')
+			domain : config.get('domain'),
+			environment : process.env.NODE_ENV
 		})
 		.then((page) => res.send(page))
 		.catch((err) => console.log(err));

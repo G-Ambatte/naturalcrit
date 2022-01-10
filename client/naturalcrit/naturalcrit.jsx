@@ -29,7 +29,8 @@ const Naturalcrit = React.createClass({
 			'/login' : (args, query) => {
 				return <LoginPage
 					redirect={query.redirect}
-					user={this.props.user} />
+					user={this.props.user}
+					environment={this.props.environment} />
 			},
 			'/success' : (args, query) => {
 				return <SuccessPage
