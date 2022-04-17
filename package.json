@@ -20,6 +20,7 @@
     "body-parser": "^1.15.2",
     "classnames": "^2.2.0",
     "cookie-parser": "^1.4.3",
+    "dedent-tabs": "^0.10.1",
     "express": "^4.13.3",
     "jwt-simple": "^0.5.0",
     "lodash": "^4.11.2",
