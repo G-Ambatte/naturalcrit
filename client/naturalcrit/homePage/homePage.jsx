@@ -7,6 +7,7 @@ const NaturalCritIcon = require('naturalcrit/svg/naturalcrit.svg.jsx');
 const HomebrewIcon = require('naturalcrit/svg/homebrew.svg.jsx');
 const TPKIcon = require('naturalcrit/svg/tpk.svg.jsx');
 const BadgeIcon = require('naturalcrit/svg/badge.svg.jsx');
+const MonsterIcon = require('naturalcrit/svg/monster.svg.jsx');
 
 
 const HomePage = React.createClass({
@@ -41,6 +42,16 @@ const HomePage = React.createClass({
 						desc : 'Effortless custom character sheets',
 
 						show : false,
+						beta : true
+					},
+					{
+						id : 'srd',
+						path : '/srdgen',
+						name : 'SRD Generator',
+						icon : <MonsterIcon />,
+						desc : 'SRD Monsters',
+
+						show : true,
 						beta : true
 					},
 

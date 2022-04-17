@@ -10,6 +10,7 @@ const SignupPage = require('./signupPage/signupPage.jsx');
 const LoginPage = require('./loginPage/loginPage.jsx');
 const SuccessPage = require('./successPage/successPage.jsx');
 const GoogleRedirect = require('./googleRedirect/googleRedirect.jsx');
+const SRDGenerator = require('../srd/generator.jsx');
 
 let Router;
 const Naturalcrit = React.createClass({
@@ -37,6 +38,10 @@ const Naturalcrit = React.createClass({
 			},
 			'/auth/google/redirect' : (args, query) => {
 				return <GoogleRedirect
+					user={this.props.user} />
+			},
+			'/srdgen' : (args, query) => {
+				return <SRDGenerator
 					user={this.props.user} />
 			},
 			'*' : () => {
