@@ -13,6 +13,7 @@
 		"superagent",
 		"pico-router",
 		"create-react-class",
-		"react-color"
+		"react-color",
+		"dedent-tabs"
 	]
 }
