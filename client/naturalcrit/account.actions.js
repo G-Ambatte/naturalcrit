@@ -52,7 +52,7 @@ const AccountActions = {
 	createSession : (token) => {
 		// MAKE COOKIE WORK WITH LOCALHOST FOR TESTING
 		//document.cookie = `nc_session=${token};max-age=${60*60*24*365}; path=/; samesite=lax`;
-		document.cookie = `nc_session=${token}; max-age=${60*60*24*365}; path=/; samesite=lax; domain=${window.domain}`;
+		document.cookie = `nc_session=${token};expires=${expiry};path=/;samesite=lax;${window.domain ? `domain=${window.domain}` : ''}`;
 	},
 
 	removeSession : () => {
