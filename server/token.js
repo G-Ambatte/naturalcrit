@@ -15,6 +15,12 @@ const generateAccessToken = (req, res)=>{
 	payload.issuer = config.get('authentication_token_issuer');
 	payload.audience = config.get('authentication_token_audience');
 
+	const token = encodeToken(payload);
+
+	return token;
+};
+
+const encodeToken = (payload)=>{
 	delete payload.password;
 	delete payload._id;
 
@@ -28,8 +34,11 @@ const generateAccessToken = (req, res)=>{
 	const token = jwt.encode(payload, secret);
 
 	return token;
-};
+}
+
+;
 
 export default {
-	generateAccessToken : generateAccessToken
+	generateAccessToken,
+	encodeToken
 };

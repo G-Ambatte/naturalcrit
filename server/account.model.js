@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import _        from 'lodash';
-import nconf    from 'nconf';
-import jwt      from 'jwt-simple';
 import bcrypt   from 'bcrypt';
+
+import token from './token.js';
 
 const SALT_WORK_FACTOR = 10;
 
@@ -23,7 +23,7 @@ AccountSchema.pre('save', async function () {
 			account.password = await bcrypt.hash(account.password, salt);
 		}
 	} catch (err) {
-		throw({ ok: false, msg: 'Error generating password hash' });
+		throw ({ ok: false, msg: 'Error generating password hash' });
 	}
 });
 
@@ -70,10 +70,7 @@ AccountSchema.methods.getJWT = function () {
 	const payload = this.toJSON();
 	payload.issued = new Date();
 
-	delete payload.password;
-	delete payload._id;
-
-	return jwt.encode(payload, nconf.get('secret'));
+	return token.encodeToken(payload);
 };
 
 const Account = mongoose.model('Account', AccountSchema);
